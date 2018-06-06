@@ -1,0 +1,28 @@
+{
+  "conjuntos": [
+    {
+      "categoria": "1",
+      "regras": [{
+        "condicao": { "campo": "custom3", "operador": "=", "valor": "Anexo A"},
+        "responsavel": "3"
+      }, { "condicao": { "campo": "custom2", "operador": "possui", "valor": "123" },
+        "responsavel": "4"
+      }]
+    }, {
+      "categoria": "2",
+      "regras": []
+    }, {
+      "categoria": "3",
+      "regras": [{ "condicao": { "campo": "custom5", "operador": "=", "valor": "123" },
+        "responsavel": "20"
+      }]
+    }, {
+      "categoria": "4",
+      "regras": [
+
+      ]
+    }
+  ]
+
+}
+
