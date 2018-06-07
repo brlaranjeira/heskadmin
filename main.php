@@ -101,12 +101,16 @@ if (isset($_GET) && isset($_GET['catid'])) {
                     }
                     ?>
                 </select>
+                <span class="span-sobe-regra">|____/\____|</span>
+                <span class="span-desce-regra">|____\/____|</span>
                 <span class="span-remove-regra">|____X____|</span>
             <p/> </div>
         <? }
-    ?><span id="span-adicionar-regra">|____+____|</span></div><?
-} ?>
+    ?>
+        <span id="span-adicionar-regra">|____+____|</span></div>
+        <p/><input type="submit" value="Salvar regras para <?=$categoria->getName()?>">
     </form>
+<? } ?>
 </body>
 <script language="ecmascript" type="application/ecmascript" src="./js/vendor/jquery.min.js"></script>
 <script language="ecmascript" type="application/ecmascript" src="./js/main.js"></script>
