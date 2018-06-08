@@ -166,6 +166,8 @@ $(document).ready( function () {
         $novo.append($valor);
         $novo.append($('<label>Atribuir para</label>'));
         $novo.append($responsavel);
+	$novo.append($('<span class="span-sobe-regra">|____/\\____|</span>'));
+        $novo.append($('<span class="span-desce-regra">|____\\/____|</span>'));
         $novo.append($('<span class="span-remove-regra">|____X____|</span>'));
         $novo.append($('<p>'));
 

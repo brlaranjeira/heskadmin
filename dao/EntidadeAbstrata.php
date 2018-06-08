@@ -452,18 +452,30 @@ abstract class EntidadeAbstrata {
         foreach ( array_keys($clazz::$dicionario) as $item ) {
             $getter = self::getGetter($item);
             $json .= ',"' . $item . '":';
-            $attr = $this->$getter();
-            if (is_object($attr)) {
-                if (is_a($attr,'EntidadeAbstrata')) {
-                    $json .= $attr->asJSON();
+
+            $attrToString = function ($x) {
+                if (is_object($x)) {
+                    if (is_a($x, 'EntidadeAbstrata')) {
+                        return $x->asJSON();
+                    } else {
+                        return json_encode($x);
+                    }
                 } else {
-                    $json .= json_encode($attr);
+                    return '"' . $x . '"';
                 }
+            };
+            $attr = $this->$getter();
+            if (is_array($attr)) {
+                $json .= '[';
+                foreach ($attr as $i => $at) {
+                    $json .= ($i > 0) ? ',' : '';
+                    $json .=  $attrToString($at);
+                }
+                $json .= ']';
             } else {
-                $json .= '"' . $attr . '"';
+                $json .= $attrToString($attr);
             }
         }
-
         /**
          * many to many
          */

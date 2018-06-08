@@ -13,6 +13,7 @@ class Usuario implements Serializable {
 	const GRUPO_FUNCIONARIOS = '10002';
 	const GRUPO_BOLSISTAS = '10003';
 	const GRUPO_SSI = '10004';
+	const GRUPO_DT = '10010';
 	
 	private static $mruQueueSize = 20;
 	/**
@@ -101,7 +102,11 @@ class Usuario implements Serializable {
 	 * @param string $uidNumber
 	 */
 	public function __construct($uid, $loadGrupos = false, $fullName = null, $uidNumber = null, $email=null ) {
-		
+
+	    if (!isset($uid)) {
+	        return;
+        }
+
 		$this->uid = $uid;
 		
 		$fromQueue = self::seekMRUUid($uid);
@@ -364,10 +369,8 @@ class Usuario implements Serializable {
 
 	public static function restoreFromSession() {
 		(session_status() != PHP_SESSION_ACTIVE) and session_start();
-        trigger_error(session_id(),512);
-
 		return isset($_SESSION['ctism_user'])
-			? Usuario::unserialize($_SESSION['ctism_user'])
+			? (new Usuario(null))->unserialize($_SESSION['ctism_user'])
 			: null;
 	}
 	

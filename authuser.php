@@ -15,7 +15,7 @@ header('Access-Control-Allow-Headers: withCredentials');
 $request = json_decode(file_get_contents('php://input'));
 
 $user = Usuario::auth($request->user,$request->password);
-if (isset($user) && $user->hasGroup(Usuario::GRUPO_SSI)) {
+if (isset($user) && $user->hasGroup(Usuario::GRUPO_DT)) {
     echo $user;
     $user->saveToSession();
 } else {

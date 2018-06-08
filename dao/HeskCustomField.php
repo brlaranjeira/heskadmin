@@ -142,10 +142,14 @@ class HeskCustomField extends EntidadeAbstrata {
      * @param string $name
      */
     public function setName( $name ) {
-        $obj = json_decode($name);
-        foreach ($obj as $k => $v) {
-            $this->name = $v;
-            return;
+        if (empty($name)) {
+            $this->name = "";
+        } else {
+            $obj = json_decode($name);
+            foreach ($obj as $k => $v) {
+                $this->name = $v;
+                return;
+            }
         }
     }
 

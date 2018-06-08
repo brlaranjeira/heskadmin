@@ -10,7 +10,7 @@
 require_once (__DIR__ . '/../dao/Usuario.php');
 
 $usr = Usuario::restoreFromSession();
-if (!isset($usr) || !$usr->hasGroup(Usuario::GRUPO_SSI)) {
+if (!isset($usr) || !$usr->hasGroup(Usuario::GRUPO_DT)) {
     $http_response_header('403');
     die('{"error":"forbidden"}');
 }

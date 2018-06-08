@@ -11,7 +11,7 @@ require_once (__DIR__ . '/dao/Usuario.php');
 if (isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
     $usr = Usuario::auth($_POST['login'],$_POST['password']);
     $usr->saveToSession();
-    if (isset($usr) && $usr->hasGroup(Usuario::GRUPO_SSI)) {
+    if (isset($usr) && $usr->hasGroup(Usuario::GRUPO_DT)) {
         header('Location: ./main.php');
     } else {
         echo 'login incorreto ou usuário não autorizado';
@@ -19,7 +19,7 @@ if (isset($_POST) && isset($_POST['login']) && isset($_POST['password'])) {
     //TODO
 }
     $usr = Usuario::restoreFromSession();
-    if (isset($usr) && $usr->hasGroup(Usuario::GRUPO_SSI)) {
+    if (isset($usr) && $usr->hasGroup(Usuario::GRUPO_DT)) {
         header('Location: ./main.php');
     } else {
         ?>
