@@ -133,10 +133,21 @@ $(document).ready( function () {
     });
 
     $('#div-regras').on('click','.span-sobe-regra',function() {
-        alert('sobe regra');
+        const $regra = $(this).parent();
+        const $anterior = $regra.prev();
+        if ( $anterior.length > 0 ) {
+            $regra.detach();
+            $regra.insertBefore($anterior);
+        }
     });
+
     $('#div-regras').on('click','.span-desce-regra',function() {
-        alert('desce regra');
+        const $regra = $(this).parent();
+        const $proxima = $regra.next();
+        if ($proxima.length) {
+            $regra.detach();
+            $regra.insertAfter($proxima);
+        }
     });
 
     $('#div-regras').on('click','#span-adicionar-regra',function() {
