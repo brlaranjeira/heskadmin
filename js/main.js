@@ -66,8 +66,11 @@ function preencheResponsaveis( selectResponsaveis ) {
 
 $(document).ready( function () {
 
-    $('#catid').val($('input[name=categoria]').val());
-
+    const get_category = $('input[name=categoria]').val();
+    if (get_category !== undefined) {
+        $('#catid').val(get_category);
+    }
+    
     $('.div-regra').each( function () {
 
         const $current = $(this);
@@ -144,7 +147,7 @@ $(document).ready( function () {
     $('#div-regras').on('click','.span-desce-regra',function() {
         const $regra = $(this).parent();
         const $proxima = $regra.next();
-        if ($proxima.length) {
+        if ($proxima.length && $proxima[0].tagName != 'SPAN') {
             $regra.detach();
             $regra.insertAfter($proxima);
         }
