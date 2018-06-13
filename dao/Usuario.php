@@ -348,7 +348,6 @@ class Usuario implements Serializable {
 	public static function auth($usr,$pw) {
 		require_once (__DIR__ . '/../lib/LDAP/ldap.php');
 		$ldap = new ldap();
-		return new Usuario($usr);
 		if ( $ldap->auth( $usr , $pw ) ) {
 			return new Usuario($usr);
 		}
@@ -394,20 +393,37 @@ class Usuario implements Serializable {
 	}
 
 	public function geraJWT() {
-	    $alg = 'HS512';
 	    $pw = 'x';
 	    $header = [
 	        'alg' => 'HS512',
             'typ' => 'JWT'
         ];
+	    $header = base64_encode(json_encode($header));
+
 	    $payload = [
-	        'uid'
-        ]
+	        'uid' => $this->uid,
+	        'groups' => '[' . implode(',',$this->getGrupos()) . ']',
+            'fullName'=> $this->fullName
+        ];
+	    $payload = base64_encode(json_encode($payload));
 
+        $signature = base64_encode(hash_hmac('SHA512',"$header.$payload",$pw));
 
+        $token = "$header.$payload.$signature";
+        return $token;
+    }
 
-
-
+    public static function verificaJWT( $jwt ) {
+	    $pw = 'x';
+        list($header,$payload,$signature) = explode('.',$jwt);
+        $hp = "$header.$payload";
+        $generatedSignature = base64_encode(hash_hmac('SHA512',$hp,$pw));
+        if ($generatedSignature == $signature) {
+            $usrJson = json_decode(base64_decode($payload));
+            return new Usuario($usrJson->uid);
+        } else {
+            return false;
+        }
     }
 
 
