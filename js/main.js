@@ -70,7 +70,7 @@ $(document).ready( function () {
     if (get_category !== undefined) {
         $('#catid').val(get_category);
     }
-    
+
     $('.div-regra').each( function () {
 
         const $current = $(this);

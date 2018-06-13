@@ -349,7 +349,7 @@ class Usuario implements Serializable {
 		require_once (__DIR__ . '/../lib/LDAP/ldap.php');
 		$ldap = new ldap();
 		return new Usuario($usr);
-		if ($ldap->auth($usr,$pw)) {
+		if ( $ldap->auth( $usr , $pw ) ) {
 			return new Usuario($usr);
 		}
 		return null;
@@ -392,6 +392,24 @@ class Usuario implements Serializable {
 		$paginas = $this->getPaginasPermitidas();
 		return array_key_exists($pag,$paginas);
 	}
+
+	public function geraJWT() {
+	    $alg = 'HS512';
+	    $pw = 'x';
+	    $header = [
+	        'alg' => 'HS512',
+            'typ' => 'JWT'
+        ];
+	    $payload = [
+	        'uid'
+        ]
+
+
+
+
+
+    }
+
 
 	
 }
