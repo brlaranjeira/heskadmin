@@ -19,7 +19,7 @@ class ConfigClass {
 
     const bdCharset = 'utf8';
 
-    const bdPasswd = '***REMOVED***';
+    const bdPasswd = '***REMOVED***
     
     /**
      * PERMISSOES DE ACESSO ÀS PÁGINAS
